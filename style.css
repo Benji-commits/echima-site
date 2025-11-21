@@ -126,12 +126,23 @@ section { padding: 50px 0; text-align: center; }
     margin-top: 18px;
 }
 .card {
-    background: var(--light);
-    border: 2px solid rgba(15,26,44,0.06);
+   
+   
     padding: 22px;
     border-radius: 8px;
     box-shadow: 0 6px 18px rgba(15,26,44,0.04);
     transition: transform 220ms ease, box-shadow 220ms ease;
+    
+    border: 3px solid rgba(255,255,255,0.06); /* base */
+    position: relative;
+    overflow: visible;
+    background: linear-gradient(180deg, var(--light), var(--accent));
+
+}
+
+.card a{
+    text-decoration: none;
+    color: #0F1A2C;
 }
 .card:hover { transform: translateY(-6px); }
 
