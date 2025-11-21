@@ -1,0 +1,238 @@
+:root {
+    --blue: #0F1A2C;
+    --light: #ffffff;
+    --gray: #f6f7f8;
+    --muted: #7b8794;
+    --accent: #dfe9ff; /* léger accent */
+}
+
+/* Reset & base */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    color: var(--blue);
+    background: var(--light);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    /* apparition initiale : opacity 0; la classe .is-loaded sur body fait apparaître */
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 450ms ease-out, transform 450ms ease-out;
+}
+
+/* Lorsque JS ajoute .is-loaded, le site devient visible */
+body.is-loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Container */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+.site-header {
+    background: var(--blue);
+    color: var(--light);
+    position: fixed;      /* FIXE, PAS sticky */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+}
+.logo {
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* Nav (desktop) */
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.main-nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+}
+.btn-contact {
+   background: rgb(104, 101, 101);
+    color: var(--blue);
+    padding: 6px 12px;
+    border-radius: 6px;
+}
+
+/* Burger (hidden on desktop) */
+.burger {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+}
+.burger-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--light);
+    margin: 4px 0;
+    transition: transform 200ms ease, opacity 200ms ease;
+}
+
+/* HERO */
+.hero {
+    padding: 80px 0;
+    background: var(--gray);
+    text-align: center;
+}
+.hero h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+.subtitle {
+    color: var(--muted);
+    margin-bottom: 16px;
+}
+.cta-btn {
+    display: inline-block;
+    background: var(--blue);
+    color: var(--light);
+    padding: 10px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: transform 150ms ease;
+}
+.cta-btn:hover { transform: translateY(-3px); }
+
+/* Sections */
+section { padding: 50px 0; text-align: center; }
+
+/* Grid of cards */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 18px;
+}
+.card {
+    background: var(--light);
+    border: 2px solid rgba(15,26,44,0.06);
+    padding: 22px;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(15,26,44,0.04);
+    transition: transform 220ms ease, box-shadow 220ms ease;
+}
+.card:hover { transform: translateY(-6px); }
+
+/* Services list on services page */
+.full-services ul {
+    text-align: left;
+    max-width: 800px;
+    margin: 10px auto 0;
+}
+.full-services li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(15,26,44,0.05);
+}
+
+/* Contact form */
+.contact-section form {
+    max-width: 600px;
+    margin: 18px auto;
+    display: flex;
+    flex-direction: column;
+}
+input, textarea {
+    margin-bottom: 10px;
+    padding: 12px;
+    border: 1px solid rgba(15,26,44,0.12);
+    border-radius: 6px;
+    font-size: 15px;
+}
+button {
+    padding: 12px;
+    border: none;
+    background: var(--blue);
+    color: var(--light);
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+.note { margin-top: 12px; color: var(--muted); font-size: 14px; }
+
+/* Footer */
+.site-footer {
+    background: var(--blue);
+    color: var(--light);
+    padding: 16px 0;
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* ------------------ Responsive & Mobile specific ------------------ */
+@media (max-width: 900px) {
+    .hero { padding: 60px 0; }
+    .header-inner { padding: 12px 0; }
+}
+
+/* Mobile layout: show burger, hide nav by default and make nav vertical */
+@media (max-width: 768px) {
+    .main-nav {
+        position: fixed;
+        top: 64px;
+        right: 12px;
+        background: rgba(15,26,44,0.98);
+        padding: 12px;
+        flex-direction: column;
+        gap: 10px;
+        border-radius: 8px;
+        display: none; /* shown when active */
+        min-width: 160px;
+    }
+    .main-nav a { color: var(--light); padding: 8px 10px; }
+    .burger { display: block; }
+
+    /* when nav has .open it becomes visible */
+    .main-nav.open { display: flex; }
+
+    /* --- EFFET BRILLANT SUR LES BORDS DES CARTES (mobile only) --- */
+    .card {
+        border: 3px solid rgba(255,255,255,0.06); /* base */
+        position: relative;
+        overflow: visible;
+        background: linear-gradient(180deg, var(--light), var(--accent));
+    
+    }
+    .card a{
+        text-decoration: none;
+        color: #0F1A2C;
+    }
+
+    /* On utilise une animation qui change la couleur de la bordure pour simuler un "shine" */
+    @keyframes border-shine {
+        0%   { border-color: rgba(255,255,255,0.06); box-shadow: 0 4px 12px rgba(15,26,44,0.05); }
+        50%  { border-color: rgba(255,255,255,0.7); box-shadow: 0 8px 20px rgba(15,26,44,0.08); }
+        100% { border-color: rgba(255,255,255,0.06); box-shadow: 0 4px 12px rgba(15,26,44,0.05); }
+    }
+
+    /* appliquer l'animation (lent mais fluide) */
+    .card.shiny {
+        animation: border-shine 2.2s ease-in-out infinite;
+    }
+}
+
+/* petites améliorations visuelles */
+@media (prefers-reduced-motion: reduce) {
+    .card, .cta-btn, body { transition: none !important; animation: none !important; }
+}
